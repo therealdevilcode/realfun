@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dropdown List Example</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-image: url('wines.jpg'); /* Set background image */
+            background-size: cover; /* Cover the entire area */
+            background-position: center; /* Center the background image */
+            flex-direction: column; /* Align items vertically */
+        }
+
+        .ctn {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 400px;
+            height: 200px;
+            border: 2px solid rgb(250, 119, 5);
+            border-radius: 10px;
+            background-color: rgba(159, 159, 159, 0.3);
+        }
+
+        select {
+            padding: 10px;
+            font-size: 16px;
+            background-color: rgb(0, 0, 0);
+            color: rgb(165, 140, 48);
+        }
+
+        label {
+            font-weight: 600;
+            color: rgb(0, 0, 0); /* Set label text color */
+            font-size: 25px;
+            margin-right: 10px;
+        }
+
+        .message {
+            margin-top: 20px;
+            font-size: 40px;
+            background-color: rgb(0, 0, 0);
+            color: rgb(240, 243, 240); /* Message text color in red */
+        }
+
+        .hidden {
+            display: none; /* Hide the element */
+        }
+    </style>
+    <script>
+        function openImage() {
+            var selectElement = document.getElementById("brand-select");
+            var selectedValue = selectElement.value;
+
+            if (selectedValue === "RED LEBEL") {
+                window.open("REDLEBEL.jpg", "_blank").focus();
+            } 
+            else if (selectedValue === "THUMBS UP") {
+                window.open("bangle.jpg", "_blank").focus(); 
+            }
+            else if (selectedValue === "OFFICRS CHOICE") {
+                window.open("LIC.PNG", "_blank").focus(); 
+            } else if (selectedValue === "royal-g") {
+                // Show the new dropdown for Royal Green
+                document.getElementById("royalGreenDropdown").classList.remove("hidden");
+            } else if (selectedValue === "BREEZER") {
+                window.open("bhai.jpg", "_blank").focus(); 
+            } else if (selectedValue === "KF_STTRONG") {
+                // Show the new dropdown for KF Strong
+                document.getElementById("kfStrongDropdown").classList.remove("hidden");
+            } else {
+                // Hide additional dropdowns and message if other options are selected
+                document.getElementById("royalGreenDropdown").classList.add("hidden");
+                document.getElementById("kfStrongDropdown").classList.add("hidden");
+                document.getElementById("message").classList.add("hidden");
+            }
+        }
+
+        function showMessage() {
+            var royalGreenSelect = document.getElementById("royal-green-select");
+            var selectedSize = royalGreenSelect.value;
+            var messageElement = document.getElementById("message");
+
+            if (selectedSize === "20ml") {
+                messageElement.textContent = "Add 10ml of water";
+            } else if (selectedSize === "40ml") {
+                messageElement.textContent = "Add 30ml of water";
+            } else if (selectedSize === "60ml") {
+                messageElement.textContent = "Add 50ml of water";
+            } else if (selectedSize === "90ml") {
+                messageElement.textContent = "SMASHANAM PAKKANE BRO";
+            }
+            
+            messageElement.classList.remove("hidden");
+        }
+
+        function openKFStrongImage() {
+            var kfStrongSelect = document.getElementById("kf-strong-select");
+            var selectedPeg = kfStrongSelect.value;
+
+            if (selectedPeg === "first-peg") {
+                window.open("V1.jpg", "_blank").focus();
+            } else if (selectedPeg === "second-peg") {
+                window.open("V2.jpg", "_blank").focus();
+            } else if (selectedPeg === "third-peg") {
+                window.open("V3.jpg", "_blank").focus();
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="ctn">
+        <label for="brand-select">Select Brand:</label>
+        <select id="brand-select" onchange="openImage()">
+            <option value="">--Select Brand--</option>
+            <option value="OFFICRS CHOICE">OFFICERS CHOICE (OC)</option>
+            <option value="RED LEBEL">RED LABEL</option>
+            <option value="royal-g">ROYAL GREEN</option>
+            <option value="KF_STTRONG">KF STRONG</option>
+            <option value="BREEZER">BREEZER</option>
+            <option value="THUMBS UP">THUMBS UP</option>
+        </select>
+    </div>
+
+    <!-- Dropdown for Royal Green sizes -->
+    <div id="royalGreenDropdown" class="ctn hidden">
+        <label for="royal-green-select">Select Size:</label>
+        <select id="royal-green-select" onchange="showMessage()">
+            <option value="">--Select Size--</option>
+            <option value="20ml">20 ML</option>
+            <option value="40ml">40 ML</option>
+            <option value="60ml">60 ML</option>
+            <option value="90ml">90 ML</option>
+        </select>
+    </div>
+
+    <!-- Dropdown for KF Strong pegs -->
+    <div id="kfStrongDropdown" class="ctn hidden">
+        <label for="kf-strong-select">Select Peg:</label>
+        <select id="kf-strong-select" onchange="openKFStrongImage()">
+            <option value="">--Select Peg--</option>
+            <option value="first-peg">First Peg</option>
+            <option value="second-peg">Second Peg</option>
+            <option value="third-peg">Third Peg</option>
+        </select>
+    </div>
+
+    <!-- Message Display -->
+    <div id="message" class="message hidden"></div>
+</body>
+</html>
